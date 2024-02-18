@@ -4,6 +4,18 @@ import supabase from '../../lib/supabase.js';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /api/quotes/:
+ *  get:
+ *    tags:
+ *      - Qoutes
+ *    responses:
+ *      200:
+ *        description: Successful response
+ *      500:
+ *        description: Server error
+ */
 router.get('/', async (req, res) => {
   try {
     let { data: quotes, error } = await supabase
@@ -21,6 +33,26 @@ router.get('/', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/quotes/{id}:
+ *  get:
+ *    tags:
+ *      - Qoutes
+ *    parameters:
+ *    - name: id
+ *      required: true
+ *      in: path
+ *      schema:
+ *        type: integer
+ *    responses:
+ *      200:
+ *        description: Successful response
+ *      404:
+ *        description: Quote not found
+ *      500:
+ *        description: Server error
+ */
 router.get('/:id', async (req, res) => {
   try {
     let { data: quote, error } = await supabase
@@ -47,6 +79,31 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/quotes/:
+ *  post:
+ *    tags:
+ *      - Qoutes
+ *    parameters:
+ *    - name: body
+ *      required: true
+ *      in: body
+ *      schema:
+ *        type: object
+ *        properties:
+ *          author:
+ *            type: string
+ *          content:
+ *            type: string
+ *    responses:
+ *      201:
+ *        description: Successful response
+ *      400:
+ *        description: Body is required
+ *      500:
+ *        description: Server error
+ */
 router.post('/', async (req, res) => {
   const { author, content } = req.body;
   if (!author || !author.trim()) {
@@ -78,6 +135,42 @@ router.post('/', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/quotes/{id}:
+ *  patch:
+ *    tags:
+ *      - Qoutes
+ *    parameters:
+ *    - name: id
+ *      required: true
+ *      in: path
+ *      schema:
+ *        type: integer
+ *    - name: author
+ *      in: body
+ *      schema:
+ *        type: object
+ *        properties:
+ *          author:
+ *            type: string
+ *    - name: content
+ *      in: body
+ *      schema:
+ *        type: object
+ *        properties:
+ *          content:
+ *            type: string
+ *    responses:
+ *      201:
+ *        description: Successful response
+ *      400:
+ *        description: Author or content is required
+ *      404:
+ *        description: Quote not found
+ *      500:
+ *        description: Server error
+ */
 router.patch('/:id', async (req, res) => {
   const { author, content } = req.body;
   if ((!author || !author.trim()) && (!content || !content.trim())) {
@@ -131,6 +224,26 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/quotes/{id}:
+ *  delete:
+ *    tags:
+ *      - Qoutes
+ *    parameters:
+ *    - name: id
+ *      required: true
+ *      in: path
+ *      schema:
+ *        type: integer
+ *    responses:
+ *      204:
+ *        description: Successful response
+ *      404:
+ *        description: Quote not found
+ *      500:
+ *        description: Server error
+ */
 router.delete('/:id', async (req, res) => {
   try {
     let { data: quote, error } = await supabase
