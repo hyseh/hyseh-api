@@ -9,7 +9,7 @@ const router = express.Router();
  * /api/quotes/:
  *  get:
  *    tags:
- *      - Qoutes
+ *      - Quotes
  *    responses:
  *      200:
  *        description: Successful response
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
  * /api/quotes/{id}:
  *  get:
  *    tags:
- *      - Qoutes
+ *      - Quotes
  *    parameters:
  *    - name: id
  *      required: true
@@ -84,7 +84,7 @@ router.get('/:id', async (req, res) => {
  * /api/quotes/:
  *  post:
  *    tags:
- *      - Qoutes
+ *      - Quotes
  *    parameters:
  *    - name: body
  *      required: true
@@ -140,7 +140,7 @@ router.post('/', async (req, res) => {
  * /api/quotes/{id}:
  *  patch:
  *    tags:
- *      - Qoutes
+ *      - Quotes
  *    parameters:
  *    - name: id
  *      required: true
@@ -229,7 +229,7 @@ router.patch('/:id', async (req, res) => {
  * /api/quotes/{id}:
  *  delete:
  *    tags:
- *      - Qoutes
+ *      - Quotes
  *    parameters:
  *    - name: id
  *      required: true
